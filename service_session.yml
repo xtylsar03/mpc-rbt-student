@@ -1,4 +1,4 @@
-name: "communication_example"
+name: "systemd_monitoring"
 root: <%= @settings["working_directory"]%>
 
 startup_window: monitoring
@@ -6,5 +6,5 @@ windows:
   - monitoring:
       layout: even-vertical
       panes:
-        - echo "Watch the receiver status here !"
-        - echo "Watch the sender status here !"
+        - journalctl -u example_receiver.service -f
+        - journalctl -u example_sender.service -f
