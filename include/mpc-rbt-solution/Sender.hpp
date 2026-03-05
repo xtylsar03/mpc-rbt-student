@@ -18,7 +18,13 @@ public:
     config(senderConfig),
     timer_period(config.sendingPeriodMillis)
   {
-    UNIMPLEMENTED(__PRETTY_FUNCTION__);
+    // 1. Připojení UDP socketu
+    create();
+    configure();
+    bind();
+
+    // 2. Inicializace callbacku
+    callback = std::bind(&Node::onDataTimerTick, this);
   }
 
   void run();

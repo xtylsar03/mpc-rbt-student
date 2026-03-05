@@ -12,16 +12,25 @@ void Sender::Node::run()
 
 void Sender::Node::onDataTimerTick()
 {
-  UNIMPLEMENTED(__PRETTY_FUNCTION__);
-
   data.timestamp =
     static_cast<uint64_t>(std::chrono::system_clock::now().time_since_epoch().count());
+
+  data.x += 1.5;
+  data.y += 2.0;
+  data.z -= 0.5;
 
   Socket::IPFrame frame{
     .port = config.remotePort,
     .address = config.remoteAddress,
   };
-  RCLCPP_INFO(logger, "Sending data to host: '%s:%d'", frame.address.c_str(), frame.port);
 
-  RCLCPP_INFO(logger, "\n\tstamp: %ld", data.timestamp);
+  // Používáme hotovou funkci od autorů
+  Utils::Message::serialize(frame, data);
+
+  if (!this->send(frame)) {
+      RCLCPP_WARN(logger, "Failed to send data!");
+  }
+
+  RCLCPP_INFO(logger, "Sending data to host: '%s:%d'", frame.address.c_str(), frame.port);
+  RCLCPP_INFO(logger, "\n\tstamp: %ld\n\tx: %f\n\ty: %f\n\tz: %f", data.timestamp, data.x, data.y, data.z);
 }
