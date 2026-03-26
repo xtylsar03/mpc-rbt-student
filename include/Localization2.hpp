@@ -3,8 +3,6 @@
 
 #include "rclcpp/rclcpp.hpp"
 #include "tf2_ros/transform_broadcaster.h"
-// PŘIDÁNO: Nutné pro statickou transformaci Lidaru
-#include "tf2_ros/static_transform_broadcaster.h" 
 #include "tf2/LinearMath/Quaternion.h"
 #include "sensor_msgs/msg/joint_state.hpp"
 #include "nav_msgs/msg/odometry.hpp"
@@ -29,11 +27,7 @@ private:
     rclcpp::Publisher<nav_msgs::msg::Odometry>::SharedPtr odometry_publisher_;
 
     // Transformations
-    // Dynamický broadcaster (pro pohyb robota mapou)
     std::unique_ptr<tf2_ros::TransformBroadcaster> tf_broadcaster_;
-    
-    // PŘIDÁNO: Statický broadcaster (pro pevné spojení Lidaru s robotem)
-    std::shared_ptr<tf2_ros::StaticTransformBroadcaster> static_tf_broadcaster_;
 
     nav_msgs::msg::Odometry odometry_;
     rclcpp::Time last_time_;

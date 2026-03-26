@@ -9,22 +9,20 @@ def generate_launch_description():
     rviz_config_path = os.path.join(package_dir, 'rviz', 'config.rviz')
     
     return LaunchDescription([
-        # 1. Tvůj C++ uzel - přidán parametr use_sim_time
+        # 1. Spuštění tvého C++ uzlu pro výpočet odometrie
         Node(
             package='mpc_rbt_student',
             executable='localization',
             name='localization_node',
-            output='screen',
-            parameters=[{'use_sim_time': True}]
+            output='screen'
         ),
         
-        # 2. RViz2 - přidán parametr use_sim_time
+        # 2. Spuštění vizualizačního programu RViz2
         Node(
             package='rviz2',
             executable='rviz2',
             name='rviz2',
             arguments=['-d', rviz_config_path],
-            output='screen',
-            parameters=[{'use_sim_time': True}]
+            output='screen'
         )
     ])
