@@ -39,7 +39,8 @@ set(dependencies
         mpc_rbt_simulator
 )
 
-add_library(${PROJECT_NAME} SHARED src/KeyboardControl.cpp src/Localization.cpp)
+# ZMĚNA: Přidán src/Planning.cpp do sdílené knihovny
+add_library(${PROJECT_NAME} SHARED src/KeyboardControl.cpp src/Localization.cpp src/Planning.cpp)
 
 ament_target_dependencies(${PROJECT_NAME} ${dependencies})
 install(TARGETS ${PROJECT_NAME}
@@ -49,28 +50,33 @@ install(TARGETS ${PROJECT_NAME}
 
 # Build and install executables
 # * * * * * * * * * * * * * * * * *
-# *      Lab 04_keyboard_control
+# * Lab 04_keyboard_control
 # * * * * * * * * * * * * * * * * *
 add_executable(keyboard_control src/keyboard_control_node.cpp)
 target_link_libraries(keyboard_control ${PROJECT_NAME})
 install(TARGETS keyboard_control DESTINATION lib/${PROJECT_NAME})
 
 # * * * * * * * * * * * * * * * * *
-# *      Lab 05_localization
+# * Lab 05_localization
 # * * * * * * * * * * * * * * * * *
 add_executable(localization src/localization_node.cpp)
 target_link_libraries(localization ${PROJECT_NAME})
 install(TARGETS localization DESTINATION lib/${PROJECT_NAME})
+
 # * * * * * * * * * * * * * * * * *
-# *      Lab 06_planning
+# * Lab 06_planning
+# * * * * * * * * * * * * * * * * *
+# ZMĚNA: Přidán spustitelný uzel pro plánování
+add_executable(planning src/planning_node.cpp)
+target_link_libraries(planning ${PROJECT_NAME})
+install(TARGETS planning DESTINATION lib/${PROJECT_NAME})
+
+# * * * * * * * * * * * * * * * * *
+# * Lab 07_control
 # * * * * * * * * * * * * * * * * *
 
 # * * * * * * * * * * * * * * * * *
-# *       Lab 07_control
-# * * * * * * * * * * * * * * * * *
-
-# * * * * * * * * * * * * * * * * *
-# *    Lab 08_behavior trees
+# * Lab 08_behavior trees
 # * * * * * * * * * * * * * * * * *
 
 

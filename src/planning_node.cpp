@@ -1,4 +1,5 @@
-#include "mpc_rbt_solution/Planning.hpp"
+
+#include "Planning.hpp"
 
 int main(int argc, char *argv[]) {
     rclcpp::init(argc, argv);
