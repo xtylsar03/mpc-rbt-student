@@ -79,7 +79,7 @@ void PlanningNode::dilateMap() {
     nav_msgs::msg::OccupancyGrid dilatedMap = map_;
     
     // Velikost nafouknutí (4 buňky při 0.05m rozlišení = 20 cm rezerva)
-    int dilation_size = 6; 
+    int dilation_size = 8; 
 
     for (int y = 0; y < (int)map_.info.height; ++y) {
         for (int x = 0; x < (int)map_.info.width; ++x) {
