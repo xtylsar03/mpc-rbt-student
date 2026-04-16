@@ -1,0 +1,21 @@
+<root BTCPP_format="4">
+  <BehaviorTree ID="WarehouseMission">
+    <Sequence name="main_mission">
+      <GetTaskService service_name="/get_pickup_task"
+                      manipulator_id="{manipulator_id}"/>
+      <LookupPose location_id="{manipulator_id}"
+                  x="{goal_x}" y="{goal_y}"/>
+      <NavigateToPoseAction action_name="/go_to_goal"
+                            x="{goal_x}" y="{goal_y}"/>
+      <ConfirmLoadingService service_name="/confirm_loading"/>
+      <GetDropoffService service_name="/get_dropoff_location"
+                         storage_id="{storage_id}"/>
+      <LookupPose location_id="{storage_id}"
+                  x="{goal_x}" y="{goal_y}"/>
+      <NavigateToPoseAction action_name="/go_to_goal"
+                            x="{goal_x}" y="{goal_y}"/>
+      <NavigateToPoseAction action_name="/go_to_goal"
+                            x="-0.5" y="0.0"/>
+    </Sequence>
+  </BehaviorTree>
+</root>

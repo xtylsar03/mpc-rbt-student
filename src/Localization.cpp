@@ -12,7 +12,7 @@ LocalizationNode::LocalizationNode() :
     // Start na x = -0.5, pohled vpřed
     odometry_.header.frame_id = "map";
     odometry_.child_frame_id = "base_link";
-    odometry_.pose.pose.position.x = -0.5;
+    odometry_.pose.pose.position.x = -0.5; //-0.5
     odometry_.pose.pose.position.y = 0.0;
     odometry_.pose.pose.position.z = 0.0;
     odometry_.pose.pose.orientation.w = 1.0;
